@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  margin: 0 auto;
+  max-width: 700px;
+}
+
+th {
+  text-align: start;
+}
+tr:nth-child(even) {
+  background-color: #f6f6f6;
+  background-blend-mode: multiply;
+}
+tr:nth-child(n+2):hover {
+  background-color: #ddd;
+  background-blend-mode: multiply;
+}
+td {
+  padding: 5px;
+  max-width: 170px;
+  overflow: hidden;
+  text-wrap: nowrap;
+
+  &:first-child{
+    width: 10px;
+  }
+}
+
+.button {
+  padding: 3px 5px;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 7px;
+  border: none;
+  box-shadow: 1px 2px 5px 1px #aaa;
+}
+.info {
+  background: #38f;
+  color: white;
+}
+.danger {
+  background: #f38;
+  color: white;
+}
