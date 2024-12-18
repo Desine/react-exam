@@ -49,3 +49,18 @@ td {
   background: #f38;
   color: white;
 }
+
+.book td{
+  height: 30px;
+}
+.manageButtons{
+  width: 100px;
+  display: flex;
+}
+.manageButtons * {
+  display: none;
+}
+
+.book:hover .manageButtons * {
+  display: block;
+}

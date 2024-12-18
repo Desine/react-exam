@@ -9,14 +9,29 @@ export default function Form({ books, setBooks, editBook, setEditBook }) {
 
   const form_onSubmit = (e) => {
     e.preventDefault();
-    const newBookData = new FormData(e.target);
-    const newBook = Object.fromEntries(newBookData.entries());
+    const formBookData = new FormData(e.target);
+    let formBook = Object.fromEntries(formBookData.entries());
 
-    const books_editing = books.filter((b) => b.id !== editBook.id);
-    newBook.id = Math.max(...books.map((b) => b.id)) + 1;
+    if (formBook.ganre === "") {
+      alert("don't be shy, set <Ganre> to something");
+      return;
+    }
+
+    let books_editing = books;
+
+    if (formBook.id === "") {
+      formBook.id = Math.max(...books.map((b) => b.id)) + 1;
+      if (formBook.id === -Infinity) formBook.id = 1;
+      books_editing = [...books_editing, formBook];
+    } else {
+      books_editing = books_editing.map((book) =>
+        book.id === parseInt(formBook.id) ? formBook : book
+      );
+    }
 
     resetEditBook();
-    setBooks([...books_editing, newBook]);
+    setBooks(books_editing);
+    localStorage.setItem("books", JSON.stringify(books));
   };
 
   const resetEditBook = () => {
@@ -36,7 +51,6 @@ export default function Form({ books, setBooks, editBook, setEditBook }) {
         name="id"
         id="id"
         value={editBook.id}
-        onInput={() => {}}
         type="text"
         hidden
         pattern="[0-9]{1,}"
@@ -66,7 +80,11 @@ export default function Form({ books, setBooks, editBook, setEditBook }) {
       />
       <br />
       <label for="ganre">Ganre</label>
-      <select name="ganre" id="ganre">
+      <select
+        name="ganre"
+        id="ganre"
+        onInput={(e) => setEditBook({ ...editBook, ganre: e.target.value })}
+      >
         <option value={editBook.ganre}>{editBook.ganre}</option>
         {ganres.map((g) => (
           <option value={g}>{g}</option>

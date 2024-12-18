@@ -30,19 +30,20 @@ export default function List({ books, setBooks, setEditBook }) {
         {books
           .filter((b) => b.ganre === ganre || ganre === "all")
           .map((b) => (
-            <tr key={b.id}>
+            <tr key={b.id} className="book">
               <td>{b.id}</td>
               <td>{b.title}</td>
               <td>{b.author}</td>
               <td>{b.ganre}</td>
+              <td className="manageButtons">
+                <button className="button info" onClick={() => setEditBook(b)}>
+                  Edit
+                </button>
 
-              <button className="button info" onClick={() => setEditBook(b)}>
-                Edit
-              </button>
-
-              <button className="button danger" onClick={() => deleteBook(b)}>
-                Delele
-              </button>
+                <button className="button danger" onClick={() => deleteBook(b)}>
+                  Delele
+                </button>
+              </td>
             </tr>
           ))}
       </tbody>

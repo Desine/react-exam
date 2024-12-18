@@ -1,4 +1,4 @@
-export const titles = [
+export const defaultBooks = [
   {
     id: 0,
     title: "my first game",
